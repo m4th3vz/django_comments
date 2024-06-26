@@ -59,3 +59,16 @@ def delete_comment(request, comment_id):
     if request.method == 'POST':
         comment.delete()
         return redirect('comments')
+
+# Editar comentário
+@login_required
+def edit_comment(request, comment_id):
+    comment = get_object_or_404(Comment, id=comment_id, user=request.user)
+    if request.method == 'POST':
+        form = CommentForm(request.POST, instance=comment)
+        if form.is_valid():
+            form.save()
+            return redirect('comments')
+    else:
+        form = CommentForm(instance=comment)
+    return render(request, 'comments.html', {'form': form, 'comments': Comment.objects.all().order_by('-created_at')})
