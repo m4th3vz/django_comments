@@ -48,14 +48,18 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ comment.user.username }}</h5>
                         <p class="card-text">{{ comment.content }}</p>
-                        <p class="text-muted">{{ comment.created_at }}</p>
+                        <p class="text-muted">
+                            {{ comment.created_at }}
+                            {% if comment.edited_at %}
+                                (editado)
+                            {% endif %}
+                        </p>
                         {% if comment.user == request.user %}
                             <button class="btn btn-primary btn-sm" onclick="editComment({{ comment.id }})">Editar</button>
                             <form method="post" action="{% url 'delete_comment' comment.id %}" style="display: inline;">
                                 {% csrf_token %}
                                 <button type="submit" class="btn btn-danger btn-sm">Apagar</button>
                             </form>
-
                             <!-- Hidden form for editing -->
                             <form id="edit-form-{{ comment.id }}" method="post" action="{% url 'edit_comment' comment.id %}" style="display: none;">
                                 {% csrf_token %}

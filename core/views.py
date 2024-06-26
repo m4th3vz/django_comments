@@ -4,6 +4,7 @@ from .forms import CustomUserCreationForm, CustomAuthenticationForm, CommentForm
 from django.contrib.auth.decorators import login_required
 from .models import Comment
 from .forms import CommentForm
+from django.utils import timezone
 
 # Página principal
 def index(request):
@@ -67,7 +68,9 @@ def edit_comment(request, comment_id):
     if request.method == 'POST':
         form = CommentForm(request.POST, instance=comment)
         if form.is_valid():
-            form.save()
+            comment = form.save(commit=False)
+            comment.edited_at = timezone.now()
+            comment.save()
             return redirect('comments')
     else:
         form = CommentForm(instance=comment)
