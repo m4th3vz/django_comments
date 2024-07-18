@@ -8,7 +8,7 @@ from django.utils import timezone
 
 # Página principal
 def index(request):
-    return render(request, 'index.html')
+    return render(request, 'comments/index.html')
 
 # Página de comentários
 @login_required
@@ -24,7 +24,7 @@ def comments(request):
         form = CommentForm()
     
     comments = Comment.objects.all().order_by('-created_at')
-    return render(request, 'comments.html', {'form': form, 'comments': comments})
+    return render(request, 'comments/comments.html', {'form': form, 'comments': comments})
 
 # Página de registro
 def register_view(request):
@@ -36,7 +36,7 @@ def register_view(request):
             return redirect('index')
     else:
         form = CustomUserCreationForm()
-    return render(request, 'register.html', {'form': form})
+    return render(request, 'comments/register.html', {'form': form})
 
 # Página de login
 def login_view(request):
@@ -51,7 +51,7 @@ def login_view(request):
                 return redirect('index')
     else:
         form = CustomAuthenticationForm()
-    return render(request, 'login.html', {'form': form})
+    return render(request, 'comments/login.html', {'form': form})
 
 # Excluir comentário
 @login_required
@@ -74,4 +74,4 @@ def edit_comment(request, comment_id):
             return redirect('comments')
     else:
         form = CommentForm(instance=comment)
-    return render(request, 'comments.html', {'form': form, 'comments': Comment.objects.all().order_by('-created_at')})
+    return render(request, 'comments/comments.html', {'form': form, 'comments': Comment.objects.all().order_by('-created_at')})

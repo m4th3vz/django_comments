@@ -38,3 +38,30 @@
 .btn-custom-2:hover {
     background-color: #074B35; /* Cor ao passar o mouse */
 }
+
+/* Rodapé */
+.footer {
+    background-color: #0e5f40; /* Cor do rodapé */
+    bottom: 0; /* Alinha o rodapé na parte inferior */
+    width: 100%; /* Define a largura do rodapé como 100% da largura da janela */
+    flex-shrink: 0; /* Impede que o rodapé encolha */
+}
+
+.navbar-brand {
+    color: white;
+    text-align: center; /* Alinha o texto centralmente */
+    width: 100%; /* Ocupa toda a largura disponível */
+}
+
+/* Mantém o rodapé no final da página */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}

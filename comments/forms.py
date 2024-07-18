@@ -1,8 +1,7 @@
-# Importando classes necessárias do Django
 from django import forms
-from .models import Comment # Importa a classe Comment de models.py
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm  # Importa formulários de autenticação do Django
-from django.contrib.auth.models import User  # Importa o modelo de usuário padrão do Django
+from .models import Comment
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.models import User
 
 # Definindo um formulário personalizado para criação de usuário
 class CustomUserCreationForm(UserCreationForm):
@@ -13,7 +12,7 @@ class CustomUserCreationForm(UserCreationForm):
 # Definindo um formulário personalizado para autenticação
 class CustomAuthenticationForm(AuthenticationForm):
     username = forms.CharField(label='Usuário')
-    password = forms.CharField(label='Senha', widget=forms.PasswordInput)  # widget para ocultar a senha durante a digitação
+    password = forms.CharField(label='Senha', widget=forms.PasswordInput)
 
 # Definindo um formulário personalizado para comentários
 class CommentForm(forms.ModelForm):

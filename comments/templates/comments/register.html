@@ -1,0 +1,15 @@
+<!-- login/templates/register.html -->
+{% extends 'base.html' %}
+
+{% block page_title %}
+      Registrar
+{% endblock page_title%}
+
+{% block content %}
+    <h2>Registrar</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Register</button>
+    </form>
+{% endblock content %}
