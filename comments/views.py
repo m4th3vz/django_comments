@@ -1,6 +1,6 @@
+# comments/views.py
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth import login, authenticate
-from .forms import CustomUserCreationForm, CustomAuthenticationForm, CommentForm
+from .forms import CommentForm
 from django.contrib.auth.decorators import login_required
 from .models import Comment
 from .forms import CommentForm
@@ -25,33 +25,6 @@ def comments(request):
     
     comments = Comment.objects.all().order_by('-created_at')
     return render(request, 'comments/comments.html', {'form': form, 'comments': comments})
-
-# Página de registro
-def register_view(request):
-    if request.method == 'POST':
-        form = CustomUserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect('index')
-    else:
-        form = CustomUserCreationForm()
-    return render(request, 'comments/register.html', {'form': form})
-
-# Página de login
-def login_view(request):
-    if request.method == 'POST':
-        form = CustomAuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect('index')
-    else:
-        form = CustomAuthenticationForm()
-    return render(request, 'comments/login.html', {'form': form})
 
 # Excluir comentário
 @login_required

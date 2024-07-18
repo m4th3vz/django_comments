@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Adicione seu aplicativo aqui (modificado)
-    'comments.apps.CommentsConfig'
+    'login.apps.LoginConfig',
+    'comments.apps.CommentsConfig',
 ]
 
 MIDDLEWARE = [
