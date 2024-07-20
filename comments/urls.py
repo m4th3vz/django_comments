@@ -1,16 +1,14 @@
 # comments/urls.py
 from django.urls import path
-from . import views
-from django.contrib.auth import views as auth_views
-from .views import comments, delete_comment, edit_comment
+from .views import IndexView, CommentsView, DeleteCommentView, EditCommentView
 
 urlpatterns = [
     # Página principal
-    path('', views.index, name='index'),
+    path('', IndexView.as_view(), name='index'),
     # Página de comentários
-    path('comments/', views.comments, name='comments'),
+    path('comments/', CommentsView.as_view(), name='comments'),
     # Caminho de exclusão
-    path('delete_comment/<int:comment_id>/', delete_comment, name='delete_comment'),
+    path('delete_comment/<int:comment_id>/', DeleteCommentView.as_view(), name='delete_comment'),
     # Caminho de edição
-    path('edit_comment/<int:comment_id>/', edit_comment, name='edit_comment'),
+    path('edit_comment/<int:comment_id>/', EditCommentView.as_view(), name='edit_comment'),
 ]
